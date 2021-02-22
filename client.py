@@ -17,8 +17,8 @@ socket.gethostname()
 
 def fish():
     while True:
-        time.sleep(3)
         print(client.recv(2048).decode(FORMAT))
+        time.sleep(1)
 
 
 def send(msg):
@@ -28,7 +28,6 @@ def send(msg):
     send_length += b' ' * (HEADER - len(send_length))
     client.send(send_length)
     client.send(message)
-    print(client.recv(2048).decode(FORMAT))
 
 def main():
     inp = input('')
