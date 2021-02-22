@@ -1,4 +1,6 @@
 import socket
+import threading
+import time
 
 HEADER = 64
 PORT = 5050
@@ -13,6 +15,12 @@ client.connect(ADDR)
 
 socket.gethostname()
 
+def fish():
+    while True:
+        time.sleep(3)
+        print(client.recv(2048).decode(FORMAT))
+
+
 def send(msg):
     message = msg.encode(FORMAT)
     msg_length = len(message)
@@ -23,10 +31,12 @@ def send(msg):
     print(client.recv(2048).decode(FORMAT))
 
 def main():
-    inp = input('Enter anything else to send to the server:')
+    inp = input('')
+    thread = threading.Thread(target=fish)
+    thread.start()
     while inp != "":
         send(inp)
-        inp = input('Enter nothing to disconnect. Enter anything else to send to the server')
+        inp = input('')
     send(DISCONNECT_MESSAGE)
 
 
