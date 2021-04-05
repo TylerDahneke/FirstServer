@@ -2,8 +2,6 @@ import socket
 import threading
 import addr_list
 
-import time
-
 HEADER = 64
 PORT = 5050
 SERVER = socket.gethostbyname(socket.gethostname())
